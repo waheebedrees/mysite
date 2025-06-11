@@ -1,0 +1,622 @@
+{% load compress %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class='dark'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Waheeb{% endblock title %}</title>
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}" />
+    {% endcompress %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      .code-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.75rem;
+    
+    }
+    
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+    
+    pre {
+        scrollbar-width: thin;
+        scrollbar-color: #4b5563 #1e293b;
+        color: #d1d5db;
+    
+    }
+    
+    .light pre {
+        scrollbar-color: #cbd5e1 #f1f5f9;
+    }
+    
+    pre::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    pre::-webkit-scrollbar-track {
+        background: rgb(59, 30, 35);
+    }
+    
+    .light pre::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    
+    pre::-webkit-scrollbar-thumb {
+        background-color: #4b5563;
+        border-radius: 10px;
+    }
+    
+    .light pre::-webkit-scrollbar-thumb {
+        background-color: #cbd5e1;
+    }
+    
+    .toc-link.active {
+        background: #3b82f6;
+        color: white;
+    }
+    
+    
+    pre code.hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0 !important;
+    }
+    
+    .hljs {
+        background-color: black !important;
+    
+    
+    }
+    
+    .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+        margin: 0 !important;
+        padding: 10px !important;
+    
+        background-color: black
+    }
+    
+    
+    
+    .hero-gradient {
+        background: radial-gradient(ellipse at top,
+                rgba(30, 41, 59, 0.8),
+                transparent),
+            radial-gradient(ellipse at bottom, rgba(15, 23, 42, 0.8), transparent);
+        color:white !important;
+    }
+    
+    .post-card {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .category-tag {
+        transition: all 0.2s ease;
+    }
+    
+    .category-tag:hover {
+        background-color: #3b82f6;
+        color: white;
+    }
+    
+    .prose {
+      :where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+          list-style-type: none; 
+            margin-top: 1.25em; 
+           margin-bottom: 1.25em; 
+           padding-inline-start: 1.625em; 
+      }}
+    
+ 
+    .prose img {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        margin: 1rem auto;
+    }
+    
+    
+    
+    /* Custom hover effects */
+    .tag-filter a,
+    .category-filter a {
+        transition: all 0.2s ease;
+    }
+    
+    .tag-filter a:hover,
+    .category-filter a:hover {
+        transform: translateY(-1px);
+    }
+    
+    .social-share a {
+        transition: transform 0.2s ease;
+    }
+    
+    .social-share a:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* In your stylesheet */
+    /* Smooth transitions for all interactive elements */
+    button,
+    .group,
+    svg {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Mobile optimization */
+
+ 
+       
+    .references {
+        counter-reset: reference-counter;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: #1a1a1a;
+        border-radius: 0.5rem;
+        border-left: 4px solid #3b82f6;
+    }
+    
+    /* Reference list styling */
+    .reference-list {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    
+    /* Individual reference items */
+    .reference-item {
+        position: relative;
+        padding-left: 2.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+    
+    .reference-item::before {
+        content: "[" counter(reference-counter) "]";
+        counter-increment: reference-counter;
+        position: absolute;
+        left: 2px;
+        font-weight: 600;
+        color: #3b82f6;
+        min-width: 2.5rem;
+    }
+        
+  
+    /* Link styling */
+    .reference-item a {
+        color: #60a5fa;
+        text-decoration: none;
+        border-bottom: 1px dotted #3b82f6;
+        transition: all 0.2s ease;
+    }
+    
+    .reference-item a:hover {
+        color: #93c5fd;
+        border-bottom-style: solid;
+    }
+    
+    /* Code blocks within references */
+    .reference-item .custom-code-block {
+        margin: 0.5rem 0;
+        background-color: #111827 !important;
+        border: 1px solid #374151;
+    }
+    
+    /* Print styles */
+    @media print {
+        .references {
+            background-color: white !important;
+            border-left: 4px solid #000;
+        }
+    
+        .reference-item::before {
+            color: #000 !important;
+        }
+    
+        .reference-item a {
+            color: #000 !important;
+            border-bottom: none !important;
+        }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .reference-item {
+            padding-left: 2rem;
+        }
+    
+        .reference-item::before {
+            left: -1.5rem;
+        }
+    }
+    
+    .references li {
+        counter-increment: reference-counter;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-left: -2rem;
+        text-indent: -2.5rem;
+    }
+    
+    /* Print styles */
+    @media print {
+        .references {
+            page-break-inside: avoid;
+        }
+    
+        .references li::before {
+            color: black;
+        }
+    
+    }
+    </style>
+
+    
+
+  </head>
+  <body class="bg-app-background-light text-app-text-light dark:bg-app-background-dark dark:text-app-text-dark min-h-screen">
+   
+     
+    {% include "navbar.html" %} 
+        
+        
+      {% block content %}
+      {# Blog post detail or list goes here #}
+      {% endblock %}
+   
+      <button id="theme-toggle"
+        class="fixed bottom-4 right-4 bg-accent text-white px-4 py-2 rounded-full shadow-lg
+            hover:bg-accent-hover">
+    </button>
+    <div class="fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-2xl mx-4 md:mx-auto">
+        <!-- Progress Bar -->
+        <div class="h-1mb-2 rounded-full">
+          <div class="h-full bg-blue-500 rounded-full transition-all duration-300" id="reading-progress" style="width: 0%">
+          </div>
+        </div>
+      </div>
+    </div>
+    {%include "footer.html" %} 
+
+
+<script>
+(function() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } else {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+})();
+        </script>
+    <script>
+      // Theme toggle functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        function applyThemeToggleLogic() {
+          if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
+          updateToggleButtonIcon();
+        }
+  
+        function updateToggleButtonIcon() {
+          if (document.documentElement.classList.contains('dark')) {
+            themeToggleBtn.innerHTML = '☀️';
+          } else {
+            themeToggleBtn.innerHTML = '🌙';
+          }
+        }
+  
+        // Initial update of button icon on load
+        updateToggleButtonIcon();
+  
+        // Attach event listener
+        themeToggleBtn.addEventListener('click', applyThemeToggleLogic);
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+          const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+          mobileMenu.classList.toggle('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Table of Contents highlighting
+        const tocNav = document.getElementById('toc');
+        if (tocNav) {
+          const links = tocNav.querySelectorAll('a');
+          
+          window.addEventListener('scroll', () => {
+            const fromTop = window.scrollY + 100;
+            
+            links.forEach(link => {
+              const section = document.querySelector(link.hash);
+              if (
+                section.offsetTop <= fromTop &&
+                section.offsetTop + section.offsetHeight > fromTop
+              ) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          });
+        }
+        
+        // Reading progress bar
+        const readingProgress = document.querySelector('.reading-progress');
+        if (readingProgress) {
+          window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight;
+            const winHeight = window.innerHeight;
+            const progress = (scrollTop / (docHeight - winHeight)) * 100;
+            readingProgress.style.width = progress + '%';
+          });
+        }
+        
+        // Like functionality
+        let liked = false;
+        let bookmarked = false;
+        let likeCount = 11;
+        
+        const toggleLike = () => {
+          liked = !liked;
+          likeCount = liked ? likeCount + 1 : likeCount - 1;
+          
+          document.getElementById('like-count').textContent = likeCount;
+          document.getElementById('mobile-like-count').textContent = likeCount;
+          
+          const likeIcon = document.getElementById('like-button').querySelector('i');
+          likeIcon.classList.toggle('far');
+          likeIcon.classList.toggle('fas');
+          likeIcon.classList.toggle('text-red-500');
+          
+          const mobileLike = document.getElementById('mobile-like');
+          mobileLike.classList.toggle('text-red-500');
+        };
+        
+        const toggleBookmark = () => {
+          bookmarked = !bookmarked;
+          
+          const bookmarkIcon = document.getElementById('bookmark-button').querySelector('i');
+          bookmarkIcon.classList.toggle('far');
+          bookmarkIcon.classList.toggle('fas');
+          bookmarkIcon.classList.toggle('text-blue-500');
+          
+          const mobileBookmark = document.getElementById('mobile-bookmark');
+          mobileBookmark.classList.toggle('text-blue-500');
+        };
+        
+        document.getElementById('like-button').addEventListener('click', toggleLike);
+        document.getElementById('mobile-like').addEventListener('click', toggleLike);
+        document.getElementById('bookmark-button').addEventListener('click', toggleBookmark);
+        document.getElementById('mobile-bookmark').addEventListener('click', toggleBookmark);
+        
+        // Copy button functionality
+        const copyButtons = document.querySelectorAll('.copy-button');
+        const notification = document.getElementById('successNotification');
+        
+        copyButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            const codeBlock = e.currentTarget.nextElementSibling.querySelector('code');
+            const codeContent = codeBlock.innerText;
+            
+            navigator.clipboard.writeText(codeContent)
+              .then(() => {
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+                
+                notification.classList.remove('opacity-0', 'translate-x-24');
+                notification.classList.add('opacity-100', 'translate-x-0');
+                
+                setTimeout(() => {
+                  button.innerHTML = originalIcon;
+                  notification.classList.remove('opacity-100', 'translate-x-0');
+                  notification.classList.add('opacity-0', 'translate-x-24');
+                }, 2000);
+              })
+              .catch(err => {
+                button.innerHTML = '<i class="fas fa-times text-red-400"></i>';
+                setTimeout(() => {
+                  button.innerHTML = originalIcon;
+                }, 2000);
+              });
+          });
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+          // Initialize variables
+          let liked = false;
+          let bookmarked = false;
+          let likeCount = 11;
+          const readingProgress = document.getElementById('reading-progress');
+
+          // Only initialize if elements exist
+          if (readingProgress) {
+            window.addEventListener('scroll', () => {
+              const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+              readingProgress.style.width = `${progress}%`;
+            });
+          }
+
+          // Like functionality
+          window.toggleLike = function () {
+            const likeIcon = document.getElementById('like-icon');
+            if (!likeIcon) return;
+
+            liked = !liked;
+            likeIcon.classList.toggle('text-sky-700');
+            likeIcon.classList.toggle('text-sky-700');
+            likeCount = liked ? likeCount + 1 : likeCount - 1;
+
+            const likeCountElement = document.getElementById('like-count');
+            if (likeCountElement) {
+              likeCountElement.textContent = likeCount;
+            }
+          };
+
+          // Bookmark functionality
+          window.toggleBookmark = function () {
+            const bookmarkIcon = document.getElementById('bookmark-icon');
+            if (!bookmarkIcon) return;
+
+            bookmarked = !bookmarked;
+            bookmarkIcon.classList.toggle('fill-blue-500');
+            bookmarkIcon.classList.toggle('text-blue-500');
+          };
+
+
+         });
+      document.addEventListener('DOMContentLoaded', () => {
+          const tocNav = document.getElementById('toc')
+          if (!tocNav) return
+
+          const links = tocNav.querySelectorAll('a[href^="#"]')
+          const sections = Array.from(links)
+            .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+            .filter(Boolean)  // filter out nulls
+
+          window.addEventListener('scroll', () => {
+            let active = sections[0]
+            for (const sec of sections) {
+              if (sec.getBoundingClientRect().top <= 100) active = sec
+            }
+            links.forEach(a => {
+              const isActive = a.getAttribute('href') === `#${active.id}`
+              a.classList.toggle('text-sky-700', isActive)
+            })
+          })
+          
+
+        const copyButton = document.getElementById('copyButton');
+        const notification = document.getElementById('successNotification');
+
+        copyButton.addEventListener('click', () => {
+          const codeContent = document.querySelector('code').innerText;
+
+          navigator.clipboard.writeText(codeContent)
+            .then(() => {
+              // Visual feedback on button
+              const originalIcon = copyButton.innerHTML;
+              copyButton.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+
+              // Show notification
+              notification.classList.remove('opacity-0', 'translate-y-4');
+              notification.classList.add('opacity-100', 'translate-y-0');
+
+              setTimeout(() => {
+                // Restore original button icon
+                copyButton.innerHTML = originalIcon;
+
+                // Hide notification
+                notification.classList.remove('opacity-100', 'translate-y-0');
+                notification.classList.add('opacity-0', 'translate-y-4');
+              }, 2000);
+            })
+            .catch(err => {
+              console.error('Failed to copy: ', err);
+            });
+        });
+          });
+
+    </script>
+    
+
+    {# (Optional) JavaScript for dynamic code block headers/copy buttons #}
+    {# Place this AFTER the theme toggle script #}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach(codeBlock => {
+                const preElement = codeBlock.parentNode;
+                const language = Array.from(codeBlock.classList).find(cls => cls.startsWith('language-'))?.replace('language-', '');
+
+                if (language) {
+                    // Create the header div
+                    const header = document.createElement('div');
+                    header.className = `flex justify-between items-center px-4 py-2 bg-neutral-900 dark:bg-neutral-800 dark:text-gray-100 text-gray-100 text-xs font-semibold rounded-t-lg`;
+                    header.innerHTML = `
+                        <span>${language.charAt(0).toUpperCase() + language.slice(1)}</span>
+                        <button class="flex items-center  text-gray-500 hover:text-gray-700 dark:hover:text-neutral-100 dark:text-neutral-400 cursor-pointer text-xs" aria-label="Copy code to clipboard">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            <span>Copy</span>
+                        </button>
+                    `;
+
+                    // Create the wrapper for rounded corners and shadow
+                    const wrapper = document.createElement('div');
+                    wrapper.className = `bg-neutral-900 rounded-lg shadow-lg overflow-hidden dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 mb-6`;
+
+                    // Replace the <pre> element with the new wrapper, then append header and original <pre>
+                    preElement.replaceWith(wrapper);
+                    wrapper.appendChild(header);
+                    wrapper.appendChild(preElement);
+
+                    // Apply the specific code block styling directly to the preElement
+                    preElement.classList.add('overflow-x-auto', 'text-sm', 'dark:bg-neutral-950', 'text-gray-800', 'dark:text-neutral-100');
+
+                    // Copy functionality
+                    const copyButton = header.querySelector('button');
+                    copyButton.addEventListener('click', () => {
+                        navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                            copyButton.querySelector('span').innerText = 'Copied!';
+                            setTimeout(() => {
+                                copyButton.querySelector('span').innerText = 'Copy';
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Failed to copy text: ', err);
+                        });
+                    });
+                }
+            });
+            // Ensure highlight.js runs after code block structure is created
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+ 
+</body>
+</html>
+
+

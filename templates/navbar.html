@@ -1,0 +1,78 @@
+<header class="sticky top-0 inset-x-0 flex flex-wrap md:center md:flex-nowrap z-50 w-full text-sm">
+    <nav
+        class="mx-auto mt-4 relative max-w-2xl w-full bg-white border border-gray-200 rounded-full mx-2 py-2.5 md:flex md:items-center md:justify-between md:py-0 md:px-4 md:mx-auto dark:bg-neutral-900 dark:border-neutral-700">
+        <div class="px-4 md:px-0 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- Logo -->
+                <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80"
+                    href="{% url 'index' %}" aria-label="Preline">
+                    <svg class="w-24 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                      
+                        <path
+                            d="M1 29.5V16.5C1 9.87258 6.37258 4.5 13 4.5C19.6274 4.5 25 9.87258 25 16.5C25 23.1274 19.6274 28.5 13 28.5H12"
+                            class="stroke-gray-800 dark:stroke-white" stroke="currentColor" stroke-width="2" />
+                        <path
+                            d="M5 29.5V16.66C5 12.1534 8.58172 8.5 13 8.5C17.4183 8.5 21 12.1534 21 16.66C21 21.1666 17.4183 24.82 13 24.82H12"
+                            class="stroke-gray-800 dark:stroke-white" stroke="currentColor" stroke-width="2" />
+                        <circle cx="13" cy="16.5214" r="5" class="fill-gray-800 dark:fill-white" fill="currentColor" />
+                    </svg>
+                </a>
+                <!-- End Logo -->
+
+                <div class="ms-1 sm:ms-2"></div>
+            </div>
+
+            <div class="md:hidden">
+                <!-- Toggle Button -->
+                <button type="button"
+                    class="hs-collapse-toggle flex justify-center items-center size-7 border border-gray-200 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                    id="mobile-menu-button" aria-expanded="false" onclick="toggleMobileMenu()"
+                    aria-label="Toggle navigation" data-hs-collapse="#hs-navbar-header-floating">
+                    <svg class="menu-open-icon  hs-collapse-open:hidden shrink-0 size-3.5"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" x2="21" y1="6" y2="6" />
+                        <line x1="3" x2="21" y1="12" y2="12" />
+                        <line x1="3" x2="21" y1="18" y2="18" />
+                    </svg>
+                    <svg class="menu-close-icon hs-collapse-open:block hidden shrink-0 size-4"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+                <!-- End Toggle Button -->
+
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:block overflow-hidden transition-all duration-300 basis-full grow"
+     aria-labelledby="hs-navbar-header-floating-collapse">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7">
+        <!-- Home Link -->
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 {% if request.resolver_match.url_name == 'index' %}border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-neutral-200{% else %}border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200{% endif %}"
+           href="{% url 'index' %}" 
+           {% if request.resolver_match.url_name == 'index' %}aria-current="page"{% endif %}>
+            Home
+        </a>
+        
+        <!-- Blog Link -->
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 {% if request.resolver_match.url_name in blog_url_names %}border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-neutral-200{% else %}border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200{% endif %}"
+           href="{% url 'post_list' %}"
+           {% if request.resolver_match.url_name in blog_url_names %}aria-current="page"{% endif %}>
+            Blog
+        </a>
+        
+        <!-- About Link -->
+        <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 {% if request.resolver_match.url_name == 'about' %}border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-neutral-200{% else %}border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200{% endif %}"
+           href="{% url 'about' %}"
+           {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>
+            About
+        </a>
+    </div>
+</div>
+        
+</nav>
+</header>
+<!-- ========== END HEADER ========== -->

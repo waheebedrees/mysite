@@ -1,0 +1,17 @@
+<div class="rounded-xl p-6 bg-gray-700 dark:bg-gray-600">
+  <h3 class="text-lg font-semibold mb-4 text-white">Tags</h3>
+  <div class="flex flex-wrap gap-2">
+    <a href="{% url 'post_list' %}" 
+       class="px-3 py-1 rounded-full text-sm {% if not selected_tag %}bg-blue-600 text-white{% else %}bg-neutral-800 text-neutral-300 hover:bg-neutral-700{% endif %}">
+       Popular 
+    </a>
+    {% for tag in tags %}
+      <a href="{% url 'tag_posts' tag.slug %}" 
+         class="px-3 py-1 rounded-full text-sm {% if tag == selected_tag %}bg-blue-600 text-white{% else %}bg-neutral-800 text-neutral-300 hover:bg-neutral-700{% endif %}">
+        {{ tag.name }}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+
