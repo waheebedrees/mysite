@@ -151,9 +151,10 @@ def remove_toc(contents):
         toc_md = match.group(1).strip()
         body_md = contents.replace(toc_md, '', 1).lstrip()
         return toc_md, body_md
+        
     else:
         toc = extract_toc(contents)
-        list_item = "## Table of Contents\n"
+        list_item = ""
         for level, title in toc:
             indent = "  " * (level- 1)
             list_item += f"{indent} - [{title}](#{str(title).replace(' ', '-').lower()})\n"

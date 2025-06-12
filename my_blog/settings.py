@@ -115,6 +115,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:8000",   # if you're using HTTPS on localhost
+    "http://localhost:8000",    # also add HTTP version just in case
+]
 
 
 # Static files (CSS, JavaScript, Images)

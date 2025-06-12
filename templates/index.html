@@ -9,11 +9,11 @@
             <!-- Page Header -->
             <div class="mb-12 text-center ">
                 <div class="inline-flex items-center justify-center mb-4">
-                    <div class="w-12 h-1 bg-primary rounded-full"></div>
-                    <span class="px-4 text-primary font-medium">BLOGs</span>
-                    <div class="w-12 h-1 bg-primary rounded-full"></div>
+                    <div class="w-12 h-1  bg-neutral-700  dark:bg-primary rounded-full"></div>
+                    <span class="px-4 font-medium">BLOGs</span>
+                    <div class="w-12 h-1 bg-neutral-700  dark:bg-primary rounded-full"></div>
                 </div>
-                <h1 class="text-4xl font-bold dark:text-white mb-4">
+                <h1 class="text-4xl font-bold   mb-4">
                     {% if category %}
                         Posts in "{{ category.name }}"
                     {% elif tag %}
@@ -22,7 +22,7 @@
                         Latest Insights
                     {% endif %}
                 </h1>
-                <p class="dark:text-gray-400  max-w-2xl mx-auto">
+                <p class="dark:text-gray-100 text-app-text-light max-w-2xl mx-auto">
                     Explore our latest articles, industry insights, and creative thoughts
                 </p>
             </div>

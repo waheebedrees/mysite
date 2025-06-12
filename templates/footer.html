@@ -5,13 +5,13 @@
             <ul
                 class="text-lg text-center sm:flex items-cente justify-center gap-14 lg:gap-10 xl:gap-14 transition-all duration-500">
                 <li class="sm:my-0 my-2">  <!-- Blog Link -->
-                    <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 {% if request.resolver_match.url_name in blog_url_names %}border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-neutral-200{% else %}border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200{% endif %}"
+                    <a class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 {% if request.resolver_match.url_name in blog_url_names %}border-gray-800  dark:border-neutral-200 dark:text-neutral-100{% else %}border-transparent text-gray-500 hover:text-gray-800 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-200{% endif %}"
                        href="{% url 'post_list' %}"
                        {% if request.resolver_match.url_name in blog_url_names %}aria-current="page"{% endif %}>
                         Blog
                     </a>
                 </li>
-                <li><a href="javascript:;" class="text-white hover:text-gray-400">Support</a></li>
+                <li><a href="javascript:;" class="hover:text-gray-400">Support</a></li>
             </ul>
             <div class="flex social-share  space-x-4 sm:justify-center  ">
                 <a href="javascript:;"
@@ -56,9 +56,11 @@
         <!--Grid-->
         <div class="py-7 border-t border-gray-700">
             <div class="flex items-center justify-center">
-                <span class="text-gray-400 ">©<a href="https://pagedone.io/">Waheeb's Blog </a>2024, All rights
+                <span class="text-gray-400 ">©<a href="{% url 'admin:index' %}">Waheeb's Blog
+                                        2024, All rights
                     reserved.</span>
             </div>
+                    
         </div>
     </div>
 </footer>
