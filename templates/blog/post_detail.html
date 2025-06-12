@@ -3,9 +3,20 @@
 
 {% block content %}
 <main>
+
   <section class="py-16 sm:py-20">
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Bottom right position -->
+<div class="fixed bottom-4 left-10 z-50 -translate-x-1/2 transform md:top-4 md:left-10  md:bottom-auto md:right-auto md:transform-none">
+  <a href="{% url 'post_list' %}" class="group flex h-12 w-12 items-center justify-center rounded-full  bg-gray-800 p-2 text-white shadow-lg transition duration-300 hover:bg-gray-900 animate-pulse shadow-lg shadow-indigo-500/50 animate-pulse shadow-lg shadow-indigo-500/50" aria-label="Back to Blogs">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform group-hover:-translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+    </svg>
+  </a>
+</div>
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">  {# Added gap for spacing #}
+
         <!-- Main Content -->
         <article class="lg:col-span-8 xl:col-span-9 order-2 lg:order-1">
           <div class="blog-content max-w-4xl mx-auto px-4 xl:px-0 pt-12 lg:pt-16 pb-12">  {# Reduced padding #}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'compressor',  # new
+
 ]
 
 
@@ -124,16 +125,35 @@ CSRF_TRUSTED_ORIGINS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
+
+
+# This is where collectstatic will copy all static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [ BASE_DIR / "static" ]  # If your CSS is in project-level static
+# Only add this if your app has a custom folder like `my_blog/static`
+
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True  # Optional but helps in deployment
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-COMPRESS_ROOT = BASE_DIR / 'static'
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_URL = STATIC_URL
 
+
+
+STATICFILES_FINDERS = [
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+            'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+                'compressor.finders.CompressorFinder',
+]
+ 
+    ##django compressor
 COMPRESS_ENABLED = True
-
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]

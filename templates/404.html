@@ -1,4 +1,5 @@
-{% load compress %} {% load static %}
+{% load compress %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
@@ -7,9 +8,8 @@
 
     <title>{% block title %}Waheeb{% endblock title %}</title>
     {% compress css %}
-    <link rel="stylesheet" href="{% static 'src/output.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
     {% endcompress %}
-    <link rel="stylesheet" href="{% static 'src/default.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
     <style>
     </style>

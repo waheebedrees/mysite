@@ -13,7 +13,7 @@
                     <span class="px-4 text-primary font-medium">OUR BLOG</span>
                     <div class="w-12 h-1 bg-primary rounded-full"></div>
                 </div>
-                <h1 class="text-4xl font-bold text-white mb-4">
+                <h1 class="text-4xl font-bold b-4">
                     {% if category %}
                         Posts in "{{ category.name }}"
                     {% elif tag %}
@@ -30,16 +30,19 @@
                 <!-- Sidebar with Filters -->
                 <div class="lg:col-span-3 order-1">
                     <div class="sticky top-28 space-y-8">
+                    <div class="flex lg:flex-col  justify-between flex-wrap gap-2">
                         {% include "blog/_category_filter.html" %}
                         {% include "blog/_tag_filter.html" %}
                     </div>
+                    </div>
+                    
                 </div>
                 <!-- Main Content -->
                 <div class="lg:col-span-9 order-2">
                     <!-- Post Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {% for post in posts %}
-                        <article class="bg-neutral-900 rounded-xl p-6 hover:bg-neutral-800 transition-colors">
+                        <article class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700">
                             <a href="{% url 'post_detail' year=post.created_on.year month=post.created_on.month day=post.created_on.day slug=post.slug %}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
           
                             {% if post.cover_image %}
@@ -50,16 +53,16 @@
                             >
                             {% endif %}
                             <div class="space-y-4">
-                              <div class="flex items-center gap-2 text-sm text-neutral-400">
+                              <div class="flex items-center gap-2 text-sm  dark:text-gray-400">
                                 <time>{{ post.created_on|date:"M d, Y" }}</time>
                                 <span>•</span>
                                 <span>{{ post.read_time }} min read</span>
                               </div>
-                              <h2 class="text-xl font-semibold text-white">{{ post.title }}</h2>
-                              <p class="text-neutral-300 line-clamp-3">{{ post.excerpt }}</p>
+                              <h2 class="text-xl font-semibold">{{ post.title }}</h2>
+                              <p class="line-clamp-3">{{ post.excerpt }}</p>
                               <div class="flex flex-wrap gap-2">
                                 {% for category in post.categories.all %}
-                                  <span class="px-2 py-1 bg-neutral-800 text-sm rounded-full">
+                                  <span class="px-2 py-1 font-semibold bg-gray-600   dark:bg-neutral-800 text-sm rounded-full">
                                     {{ category.name }}
                                   </span>
                                 {% endfor %}
